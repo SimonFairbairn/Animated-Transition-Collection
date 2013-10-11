@@ -15,7 +15,7 @@ e.g.
 
 **Modal Transitions**
 
-Add to controller (`-(void)viewDidLoad;` is good):
+Fire when you're ready to present:
 
     // Set up the ATC Transitioning Delegate
     self.atcTD = [[ATCTransitioningDelegate alloc] 
@@ -30,9 +30,11 @@ Add to controller (`-(void)viewDidLoad;` is good):
         
     [self presentViewController:detailVC animated:YES completion:nil];
     
+The modal ones will automatically take into account whether or not it's a presentation or a dismissal.
+    
 **Push Transitions**
 
-Set as the navigationController delegate (in `-(void)viewDidLoad;` works)
+Set as the navigationController delegate (in `-(void)viewDidLoad;` works). The navigationController will call it when it's time (works with segues too).
 
     self.atcTD = [[ATCTransitioningDelegate alloc] 
         initWithTransitionType:ATCTransitionAnimationTypeBounce 
@@ -40,7 +42,7 @@ Set as the navigationController delegate (in `-(void)viewDidLoad;` works)
                       duration:1.0f];
     self.navigationController.delegate = self.atcTD;
     
-Enjoy modal transitions.
+Enjoy custom transitions!
 
 Currently the two available transition types are:
 
@@ -49,10 +51,12 @@ Currently the two available transition types are:
 
 The direction option won't be applied to the Fade transition, but it will to the bounce.
 
-I'll be adding more soon!
-
 ### Demo
 
 ![Screenshot of the Select Transition screen][1]
 
 [1]: http://simonfairbairn.github.io/images/animated-transitions.png
+
+### Coming Soon
+
+More transitions, plus interactive ones.
