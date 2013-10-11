@@ -1,13 +1,13 @@
 //
-//  ATCViewController.h
+//  ATCAnimatedTransitioningFade.h
 //  Animated Transition Collection
 //
 //  Created by Simon Fairbairn on 11/10/2013.
 //  Copyright (c) 2013 Simon Fairbairn. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ATCAnimatedTransitioning.h"
 
-@interface ATCViewController : UIViewController
+@interface ATCAnimatedTransitioningFade : ATCAnimatedTransitioning 
 
 @end
