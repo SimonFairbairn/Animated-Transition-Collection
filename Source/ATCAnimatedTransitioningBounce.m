@@ -8,6 +8,11 @@
 
 #import "ATCAnimatedTransitioningBounce.h"
 
+@interface ATCAnimatedTransitioningBounce ()
+
+
+@end
+
 @implementation ATCAnimatedTransitioningBounce
 
 -(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -22,6 +27,13 @@
         }
 
     }
+    
+    if ( self.isInteractive && !self.isDismissal ) {
+        UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] init];
+        [gesture addTarget:self action:@selector(handleGesture:)];
+        [toVC.view addGestureRecognizer:gesture];
+    }
+    
     
     
     float padding = 20.0f;
@@ -70,12 +82,43 @@
         
         
     } completion:^(BOOL finished) {
-
-        [transitionContext completeTransition:YES];
+        self.isInteracting = NO;
+        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
+}
 
-
-    
+-(void)handleGesture:(UIPanGestureRecognizer *)recognizer {
+   
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:{
+            self.isInteracting = YES;
+            [self.modalView dismissViewControllerAnimated:YES completion:^{
+            }];
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            UIView *view = recognizer.view.superview;
+            CGPoint translation = [recognizer translationInView:view];
+            CGFloat percentTransitioned = (translation.y / CGRectGetHeight(view.frame));
+            [self.interactiveTransition updateInteractiveTransition:percentTransitioned];
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            if ( self.interactiveTransition.percentComplete > 0.25 ) {
+                [self.interactiveTransition finishInteractiveTransition];
+            } else {
+                [self.interactiveTransition cancelInteractiveTransition];
+            }
+            break;
+        }
+        case UIGestureRecognizerStateCancelled: {
+            [self.interactiveTransition cancelInteractiveTransition];
+            break;
+        }
+        default:{
+            break;
+        }
+    }
 }
 
 @end

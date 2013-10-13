@@ -191,10 +191,10 @@
 			children = (
 				F44E7DD1180854EB007C476E /* ATCTransitioningDelegate.h */,
 				F44E7DD2180854EB007C476E /* ATCTransitioningDelegate.m */,
-				F44E7DD518085603007C476E /* ATCAnimatedTransitioningFade.h */,
-				F44E7DD618085603007C476E /* ATCAnimatedTransitioningFade.m */,
 				F44E7DD8180859EA007C476E /* ATCAnimatedTransitioning.h */,
 				F44E7DD9180859EA007C476E /* ATCAnimatedTransitioning.m */,
+				F44E7DD518085603007C476E /* ATCAnimatedTransitioningFade.h */,
+				F44E7DD618085603007C476E /* ATCAnimatedTransitioningFade.m */,
 				F44E7DDB1808621F007C476E /* ATCAnimatedTransitioningBounce.h */,
 				F44E7DDC1808621F007C476E /* ATCAnimatedTransitioningBounce.m */,
 			);
@@ -515,6 +515,7 @@
 				F44E7DC218085285007C476E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F44E7DC318085285007C476E /* Build configuration list for PBXNativeTarget "Animated Transition CollectionTests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +524,7 @@
 				F44E7DC518085285007C476E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

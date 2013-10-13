@@ -10,7 +10,41 @@
 #import "ATCAnimatedTransitioningFade.h"
 #import "ATCAnimatedTransitioningBounce.h"
 
+@interface ATCTransitioningDelegate ()
+
+@property (nonatomic, strong) ATCAnimatedTransitioning *transition;
+
+@end
+
 @implementation ATCTransitioningDelegate
+
+#pragma mark - Properties
+
+// If the type changes, create a new object.
+-(void)setType:(ATCTransitionAnimationType)type {
+    _type = type;
+    self.transition = nil;
+}
+
+-(ATCAnimatedTransitioning *)transition {
+    if ( !_transition ) {
+        switch (self.type) {
+            case ATCTransitionAnimationTypeFade: {
+                _transition = [ATCAnimatedTransitioningFade new];
+                break;
+            }
+            case ATCTransitionAnimationTypeBounce: {
+                _transition = [ATCAnimatedTransitioningBounce new];
+                break;
+            }
+            default: {
+                _transition = [ATCAnimatedTransitioningFade new];
+                break;
+            }
+        }
+    }
+    return _transition;
+}
 
 #pragma mark - Initialisation
 
@@ -20,6 +54,7 @@
         _direction = direction;
         _duration = duration;
         _type = type;
+
     }
     return self;
 }
@@ -43,6 +78,12 @@
 
 }
 
+-(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
+    
+    if ( self.transition.isInteracting ) return self.transition.interactiveTransition;
+    return nil;
+}
+
 #pragma mark - UIViewControllerTransitioningDelegate
 
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
@@ -55,27 +96,12 @@
 
 -(id<UIViewControllerAnimatedTransitioning>)returnTypeIsDismissal:(BOOL)isDismissal {
     
-    ATCAnimatedTransitioning *typeObject;
-    
-    switch (self.type) {
-        case ATCTransitionAnimationTypeFade: {
-            typeObject = [ATCAnimatedTransitioningFade new];
-            break;
-        }
-        case ATCTransitionAnimationTypeBounce: {
-            typeObject = [ATCAnimatedTransitioningBounce new];
-            break;
-        }
-        default: {
-            typeObject = [ATCAnimatedTransitioningFade new];
-            break;
-        }
-    }
-    typeObject.dismissal = isDismissal;
-    typeObject.direction = self.direction;
-    typeObject.duration = self.duration;
-    
-    return typeObject;
+    self.transition.modalView = self.modalView;
+    self.transition.dismissal = isDismissal;
+    self.transition.direction = self.direction;
+    self.transition.duration = self.duration;
+    self.transition.isInteractive = self.interactive;
+    return self.transition;
 }
 
 

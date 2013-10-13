@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Sb1-Ga-BVd">
-                            <rect key="frame" x="0.0" y="130" width="320" height="108"/>
+                            <rect key="frame" x="0.0" y="130" width="320" height="149"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" value="1" minimumValue="0.10000000000000001" maximumValue="5" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="IPF-mW-nG3">
@@ -42,18 +42,35 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="m3p-NF-ipF">
+                                    <rect key="frame" x="43" y="96" width="51" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </switch>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interactive" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ham-PO-vLN">
+                                    <rect key="frame" x="220" y="101" width="80" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="GMg-gX-jue" firstAttribute="top" secondItem="IPF-mW-nG3" secondAttribute="bottom" constant="15" id="0dd-uw-4O7"/>
                                 <constraint firstItem="IPF-mW-nG3" firstAttribute="top" secondItem="Sb1-Ga-BVd" secondAttribute="top" constant="15" id="1f1-nW-0HL"/>
                                 <constraint firstItem="GMg-gX-jue" firstAttribute="leading" secondItem="Sb1-Ga-BVd" secondAttribute="leading" constant="20" id="DxX-1x-NXB"/>
+                                <constraint firstItem="m3p-NF-ipF" firstAttribute="top" secondItem="GMg-gX-jue" secondAttribute="bottom" constant="8" id="HOI-y2-fCC"/>
+                                <constraint firstItem="m3p-NF-ipF" firstAttribute="leading" secondItem="Sb1-Ga-BVd" secondAttribute="leading" constant="43" id="IhW-3U-iiB"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kPM-XQ-fsh" secondAttribute="trailing" constant="20" id="Pal-vR-FTk"/>
                                 <constraint firstItem="IPF-mW-nG3" firstAttribute="leading" secondItem="Sb1-Ga-BVd" secondAttribute="leading" constant="20" id="RHm-qP-Xxs"/>
+                                <constraint firstItem="ham-PO-vLN" firstAttribute="top" secondItem="Lqx-uQ-jJ8" secondAttribute="bottom" constant="17" id="UqG-e0-8PI"/>
                                 <constraint firstItem="Lqx-uQ-jJ8" firstAttribute="centerY" secondItem="GMg-gX-jue" secondAttribute="centerY" id="Xvk-SR-0z3"/>
                                 <constraint firstItem="kPM-XQ-fsh" firstAttribute="top" secondItem="Sb1-Ga-BVd" secondAttribute="top" constant="19" id="Ybq-BW-IQG"/>
                                 <constraint firstAttribute="trailing" secondItem="kPM-XQ-fsh" secondAttribute="trailing" constant="20" id="i99-e0-UOu"/>
+                                <constraint firstItem="ham-PO-vLN" firstAttribute="centerY" secondItem="m3p-NF-ipF" secondAttribute="centerY" id="kxL-4K-U7M"/>
                                 <constraint firstAttribute="trailing" secondItem="Lqx-uQ-jJ8" secondAttribute="trailing" constant="20" id="nsv-d8-PYv"/>
+                                <constraint firstAttribute="trailing" secondItem="ham-PO-vLN" secondAttribute="trailing" constant="20" id="qNP-MT-Qma"/>
                                 <constraint firstItem="IPF-mW-nG3" firstAttribute="centerY" secondItem="kPM-XQ-fsh" secondAttribute="centerY" id="yN0-Mz-Iu1"/>
                                 <constraint firstItem="kPM-XQ-fsh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Sb1-Ga-BVd" secondAttribute="top" constant="19" id="yad-9Q-qJw"/>
                             </constraints>
@@ -82,6 +99,7 @@
                         <outlet property="directionStepper" destination="GMg-gX-jue" id="aeo-Ev-FoK"/>
                         <outlet property="durationLabel" destination="kPM-XQ-fsh" id="wUe-ow-pJG"/>
                         <outlet property="durationStepper" destination="IPF-mW-nG3" id="gbf-4S-NCy"/>
+                        <outlet property="interactiveSwitch" destination="m3p-NF-ipF" id="gk2-Ei-pI8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVm-pm-5Hp" userLabel="First Responder" sceneMemberID="firstResponder"/>

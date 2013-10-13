@@ -8,6 +8,10 @@
 
 #import "ATCAnimatedTransitioningFade.h"
 
+@interface ATCAnimatedTransitioningFade ()
+
+@end
+
 @implementation ATCAnimatedTransitioningFade
 
 -(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -16,21 +20,85 @@
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     
     [[transitionContext containerView] addSubview:toVC.view];
+    if ( self.isInteractive && self.isDismissal ) {
+        [[transitionContext containerView] sendSubviewToBack:toVC.view];
+    }
+
     
-    toVC.view.alpha = 0.0f;
+    if ( !self.isDismissal ) {
+        toVC.view.alpha = 0.0f;
+    }
+
     
+    if ( self.isInteractive && !self.isDismissal ) {
+        UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] init];
+        [gesture addTarget:self action:@selector(handleGesture:)];
+        [toVC.view addGestureRecognizer:gesture];
+    }
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                           delay:0
                         options:0
                      animations:^{
-                         toVC.view.alpha = 1.f;
+                         
+                         
+                         if ( !self.isDismissal ) {
+                             toVC.view.alpha = 1.f;
+                         } else {
+                             fromVC.view.alpha = 0.0f;
+                         }
+
                      }
                      completion:^(BOOL finished) {
-                         [fromVC.view removeFromSuperview];
-                         [transitionContext completeTransition:YES];
+                         self.isInteracting = NO;
+                         if ( ![transitionContext transitionWasCancelled]) {
+                             [fromVC.view removeFromSuperview];
+                         }
+                         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
                      }];
     
     
+}
+
+-(void)handleGesture:(UIPanGestureRecognizer *)recognizer {
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:{
+            self.isInteracting = YES;
+            [self.modalView dismissViewControllerAnimated:YES completion:nil];
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            // TODO: Calculate based on opposite direction
+            
+            UIView *view = recognizer.view.superview;
+            CGPoint translation = [recognizer translationInView:view];
+            CGFloat percentTransitioned = fabsf(translation.y / CGRectGetHeight(view.frame));
+            CGFloat percentTransitionedX = fabsf(translation.x / CGRectGetWidth(view.frame));
+            
+            percentTransitioned = ( percentTransitionedX > percentTransitioned ) ? percentTransitionedX : percentTransitioned;
+            NSLog(@"%f", percentTransitioned);
+            
+            [self.interactiveTransition updateInteractiveTransition:percentTransitioned];
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            
+            if ( [self.interactiveTransition percentComplete] > 0.25 ) {
+                [self.interactiveTransition finishInteractiveTransition];
+            } else {
+                
+                [self.interactiveTransition cancelInteractiveTransition];
+            }
+            break;
+        }
+        case UIGestureRecognizerStateCancelled: {
+            [self.interactiveTransition cancelInteractiveTransition];
+            
+            break;
+        }
+        default:{
+            break;
+        }
+    }
 }
 
 @end

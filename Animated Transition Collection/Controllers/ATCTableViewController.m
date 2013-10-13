@@ -19,6 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *directionLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *directionStepper;
+@property (weak, nonatomic) IBOutlet UISwitch *interactiveSwitch;
 
 @end
 
@@ -122,12 +123,18 @@
         } else if ( indexPath.row == 1 ) {
             
             self.atcTransitioningDelegate = [[ATCTransitioningDelegate alloc] initWithTransitionType:ATCTransitionAnimationTypeBounce direction:self.directionStepper.value duration:self.durationStepper.value ];
+            
+
         }
+
+        self.atcTransitioningDelegate.interactive = self.interactiveSwitch.on;
+
         
         ATCDetailViewController *detailVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"detailViewController"];
         detailVC.modalPresentationStyle = UIModalPresentationCustom;
         detailVC.transitioningDelegate = self.atcTransitioningDelegate;
         
+        self.atcTransitioningDelegate.modalView = detailVC;
         [self presentViewController:detailVC animated:YES completion:nil];
     }
     
