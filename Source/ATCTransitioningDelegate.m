@@ -48,7 +48,9 @@
 
 #pragma mark - Initialisation
 
--(instancetype)initWithTransitionType:(ATCTransitionAnimationType)type direction:(ATCTransitionAnimationDirection)direction duration:(NSTimeInterval)duration; {
+-(instancetype)initWithTransitionType:(ATCTransitionAnimationType)type
+                            direction:(ATCTransitionAnimationDirection)direction
+                             duration:(NSTimeInterval)duration; {
     self = [super init];
     if ( self ) {
         _direction = direction;
@@ -70,33 +72,51 @@
                                               fromViewController:(UIViewController *)fromVC
                                                 toViewController:(UIViewController *)toVC {
     
+    self.transition.isPush = YES;
     if ( operation == UINavigationControllerOperationPop ) {
-        return [self returnTypeIsDismissal:YES];
+        return [self setupTransitionIsDismissal:YES];
     }
     
-    return [self returnTypeIsDismissal:NO];
+    // If we're presenting, let the transition know what it's getting
+    self.transition.destinationViewController = toVC;
+    return [self setupTransitionIsDismissal:NO];
 
 }
 
--(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
-    
-    if ( self.transition.isInteracting ) return self.transition.interactiveTransition;
+-(id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
+                        interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController {
+    if (self.transition.isInteracting ) {
+        return self.transition.interactiveTransition;
+    }
     return nil;
 }
 
+
 #pragma mark - UIViewControllerTransitioningDelegate
 
--(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return [self returnTypeIsDismissal:NO];
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                 presentingController:(UIViewController *)presenting
+                                                                     sourceController:(UIViewController *)source {
+    
+    // Can't dismiss a controller with a gesture if it has no idea which controller it's dismissing.
+    self.transition.destinationViewController = presented;
+    return [self setupTransitionIsDismissal:NO];
 }
 
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [self returnTypeIsDismissal:YES];
+    return [self setupTransitionIsDismissal:YES];
 }
 
--(id<UIViewControllerAnimatedTransitioning>)returnTypeIsDismissal:(BOOL)isDismissal {
-    
-    self.transition.modalView = self.modalView;
+-(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
+    if ( self.transition.isInteracting ) {
+        return self.transition.interactiveTransition;
+    }
+    return nil;
+}
+
+#pragma mark - Helper methods
+
+-(id<UIViewControllerAnimatedTransitioning>)setupTransitionIsDismissal:(BOOL)isDismissal {
     self.transition.dismissal = isDismissal;
     self.transition.direction = self.direction;
     self.transition.duration = self.duration;

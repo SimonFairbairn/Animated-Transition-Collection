@@ -48,12 +48,6 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationType) {
  */
 @property (nonatomic) BOOL interactive;
 
-/**
- * @property modalView
- * @brief The view being presented (only required for interactive transitions)
- */
-@property (nonatomic, strong) UIViewController *modalView;
-
 
 /**
  * @method initWithTransitionType:direction:duration

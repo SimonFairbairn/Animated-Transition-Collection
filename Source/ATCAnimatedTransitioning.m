@@ -27,6 +27,38 @@
     // Abstract method
 }
 
+-(NSString *)description {
+    NSString *direction;
+    switch (self.direction) {
+        case ATCTransitionAnimationDirectionNone: {
+            direction = @"None";
+            break;
+        }
+        case ATCTransitionAnimationDirectionLeft: {
+            direction = @"Left";
+            break;
+        }
+        case ATCTransitionAnimationDirectionTop: {
+            direction = @"Top";
+            break;
+        }
+        case ATCTransitionAnimationDirectionBottom: {
+            direction = @"Bottom";
+            break;
+        }
+        case ATCTransitionAnimationDirectionRight: {
+            direction = @"Right";
+            break;
+        }
+        default:
+            break;
+    }
+    
+    NSString *interaction = (self.isInteractive) ? @"an interactive" : @"a non-interacive";
+    NSString *dismissal = (self.isDismissal) ? @"Dismissing" : @"Presenting";
+    return [dismissal stringByAppendingFormat:@" %@ view controller (%@) with direction: %@", interaction, self.destinationViewController, direction];
+}
+
 
 
 @end

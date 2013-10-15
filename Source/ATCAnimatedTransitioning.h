@@ -33,7 +33,8 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationDirection) {
 @property (nonatomic) BOOL isInteractive;
 @property (nonatomic) BOOL isInteracting;
 
-@property (nonatomic, strong) UIViewController *modalView;
+@property (nonatomic, strong) UIViewController *destinationViewController;
+@property (nonatomic) BOOL isPush;
 
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
 

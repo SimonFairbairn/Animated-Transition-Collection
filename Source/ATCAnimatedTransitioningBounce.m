@@ -17,6 +17,7 @@
 
 -(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     
+    
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 
@@ -92,7 +93,7 @@
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:{
             self.isInteracting = YES;
-            [self.modalView dismissViewControllerAnimated:YES completion:^{
+            [self.destinationViewController dismissViewControllerAnimated:YES completion:^{
             }];
             break;
         }

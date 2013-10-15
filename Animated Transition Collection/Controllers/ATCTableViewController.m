@@ -133,8 +133,7 @@
         ATCDetailViewController *detailVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"detailViewController"];
         detailVC.modalPresentationStyle = UIModalPresentationCustom;
         detailVC.transitioningDelegate = self.atcTransitioningDelegate;
-        
-        self.atcTransitioningDelegate.modalView = detailVC;
+    
         [self presentViewController:detailVC animated:YES completion:nil];
     }
     
@@ -166,7 +165,7 @@
             
         }
     }
-    
+    self.atcTransitioningDelegate.interactive = self.interactiveSwitch.on;
     self.navigationController.delegate = self.atcTransitioningDelegate;
     
 }

@@ -20,7 +20,7 @@
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     
     [[transitionContext containerView] addSubview:toVC.view];
-    if ( self.isInteractive && self.isDismissal ) {
+    if ( self.isDismissal ) {
         [[transitionContext containerView] sendSubviewToBack:toVC.view];
     }
 
@@ -60,22 +60,34 @@
 }
 
 -(void)handleGesture:(UIPanGestureRecognizer *)recognizer {
+
+    // Are we dealing with a navigation controller?
+
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:{
             self.isInteracting = YES;
-            [self.modalView dismissViewControllerAnimated:YES completion:nil];
+            if ( self.isPush ) {
+                [(UINavigationController *)self.destinationViewController.parentViewController popViewControllerAnimated:YES];
+            } else {
+                [self.destinationViewController dismissViewControllerAnimated:YES completion:nil];
+            }
+
             break;
         }
         case UIGestureRecognizerStateChanged: {
             // TODO: Calculate based on opposite direction
-            
             UIView *view = recognizer.view.superview;
             CGPoint translation = [recognizer translationInView:view];
-            CGFloat percentTransitioned = fabsf(translation.y / CGRectGetHeight(view.frame));
-            CGFloat percentTransitionedX = fabsf(translation.x / CGRectGetWidth(view.frame));
+            CGFloat percentTransitioned;
+            CGFloat percentTransitionedX;
             
-            percentTransitioned = ( percentTransitionedX > percentTransitioned ) ? percentTransitionedX : percentTransitioned;
-            NSLog(@"%f", percentTransitioned);
+            if ( self.isPush ) {
+                percentTransitioned =  translation.x / CGRectGetWidth(view.frame);
+            } else {
+                percentTransitioned = fabsf(translation.y / CGRectGetHeight(view.frame));
+                percentTransitionedX = fabsf(translation.x / CGRectGetWidth(view.frame));
+                percentTransitioned = ( percentTransitionedX > percentTransitioned ) ? percentTransitionedX : percentTransitioned;
+            }
             
             [self.interactiveTransition updateInteractiveTransition:percentTransitioned];
             break;
