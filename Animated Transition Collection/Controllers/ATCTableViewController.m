@@ -55,6 +55,10 @@
     [super viewDidLoad];
 }
 
+-(void)viewWillLayoutSubviews {
+
+}
+
 #pragma mark - Actions
 
 - (IBAction)changeDuration:(UIStepper *)sender {

@@ -85,7 +85,8 @@
 
 -(id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                         interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController {
-    if (self.transition.isInteracting ) {
+    if ( self.transition.isInteracting ) {
+
         return self.transition.interactiveTransition;
     }
     return nil;

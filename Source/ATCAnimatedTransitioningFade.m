@@ -27,6 +27,8 @@
     
     if ( !self.isDismissal ) {
         toVC.view.alpha = 0.0f;
+    } else {
+        toVC.view.alpha = 1.0f;
     }
 
     
