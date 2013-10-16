@@ -29,7 +29,7 @@
 
 -(NSArray *)transitionList {
     if ( !_transitionList ) {
-        _transitionList = @[@[@"Simple Fade (Push)", @"Bounce (Push)"], @[@"Simple Fade (Modal)", @"Bounce (Modal)"]];
+        _transitionList = @[@[@"Simple Fade", @"Bounce"], @[@"Simple Fade", @"Bounce"]];
     }
     return _transitionList;
 }
@@ -74,9 +74,7 @@
     } else if ( sender.value == 4 ) {
         direction = @"Bottom";
     }
-    
     self.directionLabel.text = [@"Direction: " stringByAppendingString:direction];
-
 }
 
 #pragma mark - Table view data source
@@ -112,7 +110,6 @@
         default: {
             break;
         }
-            
     }
     return title;
 }
@@ -125,19 +122,14 @@
         if ( indexPath.row == 0 ) {
             self.atcTransitioningDelegate = [[ATCTransitioningDelegate alloc] initWithTransitionType:ATCTransitionAnimationTypeFade direction:self.directionStepper.value duration:self.durationStepper.value ];
         } else if ( indexPath.row == 1 ) {
-            
             self.atcTransitioningDelegate = [[ATCTransitioningDelegate alloc] initWithTransitionType:ATCTransitionAnimationTypeBounce direction:self.directionStepper.value duration:self.durationStepper.value ];
-            
-
         }
 
         self.atcTransitioningDelegate.interactive = self.interactiveSwitch.on;
-
         
         ATCDetailViewController *detailVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"detailViewController"];
         detailVC.modalPresentationStyle = UIModalPresentationCustom;
         detailVC.transitioningDelegate = self.atcTransitioningDelegate;
-    
         [self presentViewController:detailVC animated:YES completion:nil];
     }
     
@@ -171,7 +163,6 @@
     }
     self.atcTransitioningDelegate.interactive = self.interactiveSwitch.on;
     self.navigationController.delegate = self.atcTransitioningDelegate;
-    
 }
 
 

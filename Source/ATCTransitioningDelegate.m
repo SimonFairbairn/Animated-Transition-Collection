@@ -121,7 +121,7 @@
     self.transition.dismissal = isDismissal;
     self.transition.direction = self.direction;
     self.transition.duration = self.duration;
-    self.transition.isInteractive = self.interactive;
+    self.transition.interactive = self.interactive;
     return self.transition;
 }
 

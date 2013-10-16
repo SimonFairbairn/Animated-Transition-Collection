@@ -51,7 +51,7 @@
 
                      }
                      completion:^(BOOL finished) {
-                         self.isInteracting = NO;
+                         self.interacting = NO;
                          if ( ![transitionContext transitionWasCancelled]) {
                              [fromVC.view removeFromSuperview];
                          }
@@ -67,7 +67,7 @@
 
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:{
-            self.isInteracting = YES;
+            self.interacting = YES;
             if ( self.isPush ) {
                 [(UINavigationController *)self.destinationViewController.parentViewController popViewControllerAnimated:YES];
             } else {

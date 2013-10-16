@@ -100,7 +100,7 @@
         [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext] delay:0 options:0 animations:^{
             fromViewController.view.frame = finalFrame;
         } completion:^(BOOL finished) {
-            self.isInteracting = NO;
+            self.interacting = NO;
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
         
@@ -113,7 +113,7 @@
             }
 
         } completion:^(BOOL finished) {
-            self.isInteracting = NO;
+            self.interacting = NO;
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     }
@@ -123,7 +123,7 @@
     
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:{
-            self.isInteracting = YES;
+            self.interacting = YES;
             if ( self.isPush ) {
                 [(UINavigationController *)self.destinationViewController.parentViewController popViewControllerAnimated:YES];
             } else {
@@ -132,6 +132,7 @@
             break;
         }
         case UIGestureRecognizerStateChanged: {
+            
             UIView *view = recognizer.view.superview;
             CGFloat percentTransitioned = 0.0f;
             CGPoint translation = [recognizer translationInView:view];
@@ -149,13 +150,30 @@
                 percentTransitioned = ( percentTransitionedX > percentTransitioned ) ? percentTransitionedX : percentTransitioned;
             }
             
-
+            
             if (percentTransitioned >= 1.0)
                 percentTransitioned = 0.99;
             [self.interactiveTransition updateInteractiveTransition:percentTransitioned];
             break;
         }
         case UIGestureRecognizerStateEnded: {
+            CGPoint velocity = [recognizer velocityInView:recognizer.view.superview];
+            CGFloat velocitySpeed = 1.0f;
+            
+            if ( self.direction == ATCTransitionAnimationDirectionLeft ) {
+                velocitySpeed = (velocity.x / recognizer.view.superview.frame.size.width);
+            } else if ( self.direction == ATCTransitionAnimationDirectionRight ) {
+                velocitySpeed = fabsf((velocity.x / recognizer.view.superview.frame.size.width));
+            } else if ( self.direction == ATCTransitionAnimationDirectionTop ) {
+                velocitySpeed = fabsf((velocity.y / recognizer.view.superview.frame.size.height));
+            } else if ( self.direction == ATCTransitionAnimationDirectionBottom ) {
+                velocitySpeed = (velocity.y / recognizer.view.superview.frame.size.height);
+            }
+            
+            if ( velocitySpeed < 1 ) velocitySpeed = 1;
+            
+            self.interactiveTransition.completionSpeed = self.interactiveTransition.completionSpeed * velocitySpeed;
+            
             if ( self.interactiveTransition.percentComplete > 0.25 ) {
                 [self.interactiveTransition finishInteractiveTransition];
             } else {

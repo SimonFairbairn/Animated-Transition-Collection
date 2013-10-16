@@ -25,18 +25,55 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationDirection) {
  */
 @interface ATCAnimatedTransitioning : NSObject <UIViewControllerAnimatedTransitioning>
 
+/**
+ * @class ATCTransitionAnimationDirection
+ * @brief Some of our subclasses are going to be able to dictate
+ * which direction the transition appears from
+ */
 @property (nonatomic) ATCTransitionAnimationDirection direction;
+
+/**
+ * @class duration
+ * @brief Surely no explanation required. Surely.
+ * 
+ * Oh, alright. The duration of the animation.
+ */
 @property (nonatomic) NSTimeInterval duration;
 
+/**
+ * @class dismissal
+ * @brief Are we in the throws of a passionate dismissal?
+ */
 @property (nonatomic, getter = isDismissal) BOOL dismissal;
 
-@property (nonatomic) BOOL isInteractive;
-@property (nonatomic) BOOL isInteracting;
+/**
+ * @class interactive
+ * @brief Should this thing be interactive?
+ */
+@property (nonatomic, getter = isInteractive) BOOL interactive;
 
+/**
+ * @class interacting
+ * @brief Are we currently seeing user interaction
+ */
+@property (nonatomic, getter = isInteracting) BOOL interacting;
+
+/**
+ * @class destinationViewController
+ * @brief In order for interactions to work, we need a reference
+ * to the presented view controller.
+ */
 @property (nonatomic, strong) UIViewController *destinationViewController;
+
+/**
+ * @class isPush
+ * @brief Did this transition come from a navigation controller?
+ */
 @property (nonatomic) BOOL isPush;
 
+/**
+ * @class interactiveTransition
+ */
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
-
 
 @end
