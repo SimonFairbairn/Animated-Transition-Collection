@@ -1,7 +1,7 @@
 Animated-Transition-Collection
 ==============================
 
-A collection of easy-to-use UIViewController animated transitions. 
+A collection of easy-to-use UIViewController animated transitions. Includes triggered and interactive versions.
 
 ### Usage
 
@@ -27,7 +27,10 @@ Fire when you're ready to present:
     UIViewController *yourVC = [[UIViewController alloc] init];
     yourVC.modalPresentationStyle = UIModalPresentationCustom;
     yourVC.transitioningDelegate = self.atcTD;
-        
+      
+    // Interactive ?
+    self.atcTransitioningDelegate.interactive = YES;  
+    
     [self presentViewController:detailVC animated:YES completion:nil];
     
 The modal ones will automatically take into account whether or not it's a presentation or a dismissal.
@@ -40,16 +43,20 @@ Set as the navigationController delegate (in `-(void)viewDidLoad;` works). The n
         initWithTransitionType:ATCTransitionAnimationTypeBounce 
                      direction:ATCTransitionAnimationDirectionNone 
                       duration:1.0f];
+
+    // Interactive ?
+    self.atcTransitioningDelegate.interactive = YES;  
+                  
     self.navigationController.delegate = self.atcTD;
     
-Enjoy custom transitions!
+Enjoy custom interactive transitions!
 
 Currently the two available transition types are:
 
 1. `ATCTransitionAnimationTypeFade`
 1. `ATCTransitionAnimationTypeBounce`
 
-The direction option won't be applied to the Fade transition, but it will to the bounce.
+The direction option won't be applied to the Fade transition, but it will to the bounce. To dismiss interactively, drag in the opposite direction it came in.
 
 ### Demo
 
@@ -59,4 +66,4 @@ The direction option won't be applied to the Fade transition, but it will to the
 
 ### Coming Soon
 
-More transitions, plus interactive ones.
+More transitions.
