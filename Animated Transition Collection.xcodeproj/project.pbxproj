@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F407CE4F180FAE7600399A8C /* ATCAnimatedTransitioningSquish.m in Sources */ = {isa = PBXBuildFile; fileRef = F407CE4E180FAE7600399A8C /* ATCAnimatedTransitioningSquish.m */; };
 		F44E7D9218085285007C476E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F44E7D9118085285007C476E /* Foundation.framework */; };
 		F44E7D9418085285007C476E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F44E7D9318085285007C476E /* CoreGraphics.framework */; };
 		F44E7D9618085285007C476E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F44E7D9518085285007C476E /* UIKit.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F407CE4D180FAE7600399A8C /* ATCAnimatedTransitioningSquish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATCAnimatedTransitioningSquish.h; path = Source/ATCAnimatedTransitioningSquish.h; sourceTree = SOURCE_ROOT; };
+		F407CE4E180FAE7600399A8C /* ATCAnimatedTransitioningSquish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ATCAnimatedTransitioningSquish.m; path = Source/ATCAnimatedTransitioningSquish.m; sourceTree = SOURCE_ROOT; };
 		F44E7D8E18085285007C476E /* Animated Transition Collection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Animated Transition Collection.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F44E7D9118085285007C476E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F44E7D9318085285007C476E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -197,6 +200,8 @@
 				F44E7DD618085603007C476E /* ATCAnimatedTransitioningFade.m */,
 				F44E7DDB1808621F007C476E /* ATCAnimatedTransitioningBounce.h */,
 				F44E7DDC1808621F007C476E /* ATCAnimatedTransitioningBounce.m */,
+				F407CE4D180FAE7600399A8C /* ATCAnimatedTransitioningSquish.h */,
+				F407CE4E180FAE7600399A8C /* ATCAnimatedTransitioningSquish.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 				F44E7DD718085603007C476E /* ATCAnimatedTransitioningFade.m in Sources */,
 				F44E7DDA180859EA007C476E /* ATCAnimatedTransitioning.m in Sources */,
 				F44E7DD3180854EB007C476E /* ATCTransitioningDelegate.m in Sources */,
+				F407CE4F180FAE7600399A8C /* ATCAnimatedTransitioningSquish.m in Sources */,
 				F44E7D9E18085285007C476E /* main.m in Sources */,
 				F44E7DCD1808531C007C476E /* ATCTableViewController.m in Sources */,
 				F44E7DDD1808621F007C476E /* ATCAnimatedTransitioningBounce.m in Sources */,

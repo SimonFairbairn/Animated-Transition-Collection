@@ -47,23 +47,10 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationDirection) {
 @property (nonatomic, getter = isDismissal) BOOL dismissal;
 
 /**
- * @class interactive
- * @brief Should this thing be interactive?
- */
-@property (nonatomic, getter = isInteractive) BOOL interactive;
-
-/**
  * @class interacting
  * @brief Are we currently seeing user interaction
  */
 @property (nonatomic, getter = isInteracting) BOOL interacting;
-
-/**
- * @class destinationViewController
- * @brief In order for interactions to work, we need a reference
- * to the presented view controller.
- */
-@property (nonatomic, strong) UIViewController *destinationViewController;
 
 /**
  * @class isPush
@@ -75,5 +62,7 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationDirection) {
  * @class interactiveTransition
  */
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactiveTransition;
+
+-(void)handlePanGesture:(UIPanGestureRecognizer *)recognizer inViewController:(UIViewController *)controller;
 
 @end

@@ -32,11 +32,6 @@
     }
 
     
-    if ( self.isInteractive && !self.isDismissal ) {
-        UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] init];
-        [gesture addTarget:self action:@selector(handleGesture:)];
-        [toVC.view addGestureRecognizer:gesture];
-    }
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                           delay:0
                         options:0
@@ -61,19 +56,15 @@
     
 }
 
--(void)handleGesture:(UIPanGestureRecognizer *)recognizer {
-
-    // Are we dealing with a navigation controller?
-
+-(void)handlePanGesture:(UIPanGestureRecognizer *)recognizer inViewController:(UIViewController *)controller {
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:{
             self.interacting = YES;
             if ( self.isPush ) {
-                [(UINavigationController *)self.destinationViewController.parentViewController popViewControllerAnimated:YES];
+                [(UINavigationController *)controller.parentViewController popViewControllerAnimated:YES];
             } else {
-                [self.destinationViewController dismissViewControllerAnimated:YES completion:nil];
+                [controller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             }
-
             break;
         }
         case UIGestureRecognizerStateChanged: {

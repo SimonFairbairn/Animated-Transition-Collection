@@ -8,26 +8,28 @@
 
 #import "ATCAnimatedTransitioningBounce.h"
 
-@interface ATCAnimatedTransitioningBounce ()
+#define debugLog 0
 
+@interface ATCAnimatedTransitioningBounce ()
 
 @end
 
 @implementation ATCAnimatedTransitioningBounce
 
--(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 
-
-    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    UIView *container = [transitionContext containerView];
+-(void)animateTransitionWithContext:(id<UIViewControllerContextTransitioning>)transitionContext
+                 fromViewController:(UIViewController *)fromViewController
+                   toViewController:(UIViewController *)toViewController
+                           fromView:(UIView *)fromView
+                             toView:(UIView *)toView {
     
+    UIView *container = [transitionContext containerView];
     CGRect toVCFrame = toViewController.view.frame;
     CGRect fromVCFrame = fromViewController.view.frame;
     CGRect finalFrame = fromVCFrame;
     CGFloat padding = 20.0f;
     
-
+    
     
     if (self.isDismissal) {
         [container insertSubview:toViewController.view belowSubview:fromViewController.view];
@@ -59,15 +61,10 @@
         
         
     } else {
-        if ( self.isInteractive ) {
-            UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] init];
-            [gesture addTarget:self action:@selector(handleGesture:)];
-            [toViewController.view addGestureRecognizer:gesture];
-        }
         // Set up initial state
-        [container addSubview:toViewController.view];
+        [container addSubview:toView];
         toVCFrame.origin.y = toVCFrame.size.height + padding;
-
+        
         switch (self.direction) {
             case ATCTransitionAnimationDirectionNone:
             case ATCTransitionAnimationDirectionLeft: {
@@ -92,9 +89,9 @@
             default:
                 break;
         }
-        toViewController.view.frame = toVCFrame;
+        toView.frame = toVCFrame;
     }
-
+    
     toVCFrame = fromVCFrame;
     if ( self.isInteracting ) {
         [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext] delay:0 options:0 animations:^{
@@ -111,23 +108,28 @@
             } else {
                 toViewController.view.frame = toVCFrame;
             }
-
+            
         } completion:^(BOOL finished) {
             self.interacting = NO;
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     }
+    
 }
 
--(void)handleGesture:(UIPanGestureRecognizer *)recognizer {
+
+-(void)handlePanGesture:(UIPanGestureRecognizer *)recognizer inViewController:(UIViewController *)controller {
+#if debugLog
+    NSLog(@"%@", self.destinationViewController);
+#endif
     
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:{
             self.interacting = YES;
             if ( self.isPush ) {
-                [(UINavigationController *)self.destinationViewController.parentViewController popViewControllerAnimated:YES];
+                [(UINavigationController *)controller.parentViewController popViewControllerAnimated:YES];
             } else {
-                [self.destinationViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                [controller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             }
             break;
         }
@@ -190,5 +192,6 @@
         }
     }
 }
+
 
 @end

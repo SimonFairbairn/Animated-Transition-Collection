@@ -16,7 +16,8 @@
  */
 typedef NS_ENUM(NSInteger, ATCTransitionAnimationType) {
     ATCTransitionAnimationTypeFade,
-    ATCTransitionAnimationTypeBounce
+    ATCTransitionAnimationTypeBounce,
+    ATCTransitionAnimationTypeSquish
 };
 
 @interface ATCTransitioningDelegate : NSObject <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>
@@ -33,7 +34,8 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationType) {
  * Automatically configures an ATCAnimatedTransitioning subclass.
  * Defaults to ATCTransitionAnimationTypeFade
  */
-@property (nonatomic) ATCTransitionAnimationType type;
+@property (nonatomic) ATCTransitionAnimationType presentationType;
+@property (nonatomic) ATCTransitionAnimationType dismissalType;
 
 /**
  * @property direction
@@ -51,8 +53,14 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationType) {
 
 /**
  * @method initWithTransitionType:direction:duration
- * @brief This class' designated initializer. 
+ * @brief Conenvience initializer if you want to use the same type backwards and forwards
  */
 -(instancetype)initWithTransitionType:(ATCTransitionAnimationType)type direction:(ATCTransitionAnimationDirection)direction duration:(NSTimeInterval)duration;
+
+/**
+ * @method initWithPresentationTransition:dismissalTransition:direction:duration
+ * @brief This class' designated initializer.
+ */
+-(instancetype)initWithPresentationTransition:(ATCTransitionAnimationType)presentationType dismissalTransition:(ATCTransitionAnimationType)dismissalType direction:(ATCTransitionAnimationDirection)direction duration:(NSTimeInterval)duration;
 
 @end

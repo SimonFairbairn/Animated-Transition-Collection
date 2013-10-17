@@ -25,7 +25,20 @@
 }
 
 -(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    // Abstract method
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIView *fromView = fromViewController.view;
+    UIView *toView = toViewController.view;
+    
+    [self animateTransitionWithContext:transitionContext fromViewController:fromViewController toViewController:toViewController fromView:fromView toView:toView];
+}
+
+-(void)animateTransitionWithContext:(id<UIViewControllerContextTransitioning>)transitionContext
+                 fromViewController:(UIViewController *)fromViewController
+                   toViewController:(UIViewController *)toViewController
+                           fromView:(UIView *)fromView
+                             toView:(UIView *)toView  {
+    
 }
 
 -(NSString *)description {
@@ -55,11 +68,12 @@
             break;
     }
     
-    NSString *interaction = (self.isInteractive) ? @"an interactive" : @"a non-interacive";
     NSString *dismissal = (self.isDismissal) ? @"Dismissing" : @"Presenting";
-    return [dismissal stringByAppendingFormat:@" %@ view controller (%@) with direction: %@", interaction, self.destinationViewController, direction];
+    return [dismissal stringByAppendingFormat:@" with direction: %@", direction];
 }
 
-
+-(void)handlePanGesture:(UIPanGestureRecognizer *)recognizer inViewController:(UIViewController *)controller {
+    
+}
 
 @end
