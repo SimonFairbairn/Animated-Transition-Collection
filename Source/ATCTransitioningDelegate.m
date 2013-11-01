@@ -12,7 +12,7 @@
 #import "ATCAnimatedTransitioningSquish.h"
 
 // Use this switch to enable debugging
-#define debugLog 1
+#define debugLog 0
 
 @interface ATCTransitioningDelegate ()
 
