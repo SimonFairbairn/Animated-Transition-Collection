@@ -30,11 +30,12 @@
     CGFloat padding = 20.0f;
     
     
+    ATCTransitionAnimationDirection direction = [self adjustDirectionForOrientation:toViewController.interfaceOrientation];
     
     if (self.isDismissal) {
         [container insertSubview:toViewController.view belowSubview:fromViewController.view];
         
-        switch (self.direction) {
+        switch (direction) {
             case ATCTransitionAnimationDirectionNone:
             case ATCTransitionAnimationDirectionLeft: {
                 finalFrame = CGRectMake(CGRectGetWidth(fromVCFrame) + padding, fromVCFrame.origin.y, CGRectGetWidth(fromVCFrame), CGRectGetHeight(fromVCFrame));
@@ -65,7 +66,7 @@
         [container addSubview:toView];
         toVCFrame.origin.y = toVCFrame.size.height + padding;
         
-        switch (self.direction) {
+        switch (direction) {
             case ATCTransitionAnimationDirectionNone:
             case ATCTransitionAnimationDirectionLeft: {
                 toVCFrame = CGRectMake(CGRectGetWidth(fromVCFrame) + padding, fromVCFrame.origin.y, CGRectGetWidth(fromVCFrame), CGRectGetHeight(fromVCFrame));

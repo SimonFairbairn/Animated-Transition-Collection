@@ -65,4 +65,6 @@ typedef NS_ENUM(NSInteger, ATCTransitionAnimationDirection) {
 
 -(void)handlePanGesture:(UIPanGestureRecognizer *)recognizer inViewController:(UIViewController *)controller;
 
+-(ATCTransitionAnimationDirection)adjustDirectionForOrientation:(UIInterfaceOrientation)orientation;
+
 @end

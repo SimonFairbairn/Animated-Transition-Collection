@@ -25,8 +25,10 @@
     
 }
 
--(void)animateDismissalWithContext:(id<UIViewControllerContextTransitioning>)context fromViewController:(UIViewController *)fromViewController fromView:(UIView *)fromView toView:(UIView *)toView {
-
+-(void)animateDismissalWithContext:(id<UIViewControllerContextTransitioning>)context
+                fromViewController:(UIViewController *)fromViewController
+                          fromView:(UIView *)fromView toView:(UIView *)toView {
+    
     UIView *container = [context containerView];
     NSTimeInterval duration = [self transitionDuration:context];
     
@@ -37,25 +39,63 @@
     CGRect initialFrame = [context initialFrameForViewController:fromViewController];
     toView.frame = initialFrame;
     toView.alpha = 0.2f;
+    CGAffineTransform transform = fromView.transform;
+    CGRect originalFromViewFrame = fromView.frame;
+    BOOL isSideways = NO;
+    if ( !self.isPush ) {
+        if ( fromViewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || fromViewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight ) {
+            fromView.transform = CGAffineTransformIdentity;
+            fromView.frame = CGRectMake(0, 0, originalFromViewFrame.size.height, originalFromViewFrame.size.width);
+            
+            isSideways = YES;
+        }
+    }
     
     UIView *snapshot = [fromView resizableSnapshotViewFromRect:fromView.frame  afterScreenUpdates:NO withCapInsets:UIEdgeInsetsZero];
-    [container addSubview:snapshot];
-
     
-
+    if ( isSideways ) {
+        snapshot.frame = CGRectMake(0, 0, originalFromViewFrame.size.height, originalFromViewFrame.size.width);
+        snapshot.layer.position = CGPointMake(CGRectGetMidX(originalFromViewFrame), CGRectGetMidY(originalFromViewFrame));
+    }
+    
+    snapshot.transform = transform;
+    [container addSubview:snapshot];
+    
     [UIView animateKeyframesWithDuration:duration delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubic animations:^{
         
         [UIView addKeyframeWithRelativeStartTime:0.0f relativeDuration:0.6f animations:^{
             toView.alpha = 0.6f;
+            
             CGRect snapshotFrame = snapshot.frame;
-            snapshotFrame.origin.x = CGRectGetMidX(initialFrame) - 5.0f;
-            snapshotFrame.size.width = 10.0f;
-            snapshot.frame = snapshotFrame;
+            if ( isSideways ) {
+                
+                snapshotFrame.origin.y = CGRectGetMidY(initialFrame) - 5.0f;
+                snapshotFrame.size.height = 10.0f;
+                snapshot.frame = snapshotFrame;
+                
+            } else {
+                
+                snapshotFrame.origin.x = CGRectGetMidX(initialFrame) - 5.0f;
+                snapshotFrame.size.width = 10.0f;
+                snapshot.frame = snapshotFrame;
+                
+            }
         }];
-        [UIView addKeyframeWithRelativeStartTime:0.6f relativeDuration:0.3f animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.6f relativeDuration:0.4f animations:^{
             CGRect snapshotFrame = snapshot.frame;
-            snapshotFrame.origin.y = CGRectGetHeight(initialFrame);
-            snapshot.frame = snapshotFrame;
+            
+            if ( isSideways ) {
+                snapshotFrame.origin.x = CGRectGetWidth(initialFrame);
+                snapshotFrame.size.height = 5.0f;
+                snapshot.frame = snapshotFrame;
+                
+            } else {
+                snapshotFrame.origin.y = CGRectGetHeight(initialFrame);
+                snapshotFrame.size.width = 5.0f;
+                snapshot.frame = snapshotFrame;
+                
+            }
+            
             toView.alpha = 1.0f;
         }];
     } completion:^(BOOL finished) {
@@ -65,10 +105,6 @@
         
     }];
     
-    
-    
-    
-
 }
 
 
@@ -78,7 +114,7 @@
     NSTimeInterval duration = [self transitionDuration:context];
     
     [container addSubview:toView];
-
+    
     CGRect initialFrame = [context initialFrameForViewController:fromViewController];
     UIView *blackView = [[UIView alloc] initWithFrame:initialFrame];
     blackView.backgroundColor = [UIColor blackColor];

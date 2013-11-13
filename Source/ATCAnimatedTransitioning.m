@@ -76,4 +76,20 @@
     
 }
 
+-(ATCTransitionAnimationDirection)adjustDirectionForOrientation:(UIInterfaceOrientation)orientation {
+    ATCTransitionAnimationDirection direction = self.direction;
+    if ( !self.isPush ) {
+        if ( orientation == UIInterfaceOrientationLandscapeRight ) {
+            if ( direction != ATCTransitionAnimationDirectionNone ) {
+                direction = (self.direction - 1 == 0) ? 4 : self.direction - 1;
+            }
+        } else if ( orientation == UIInterfaceOrientationLandscapeLeft ) {
+            if ( direction != ATCTransitionAnimationDirectionNone ) {
+                direction = (self.direction + 1 > 4) ? 1 : self.direction + 1;
+            }
+        }
+    }
+    return direction;
+}
+
 @end
