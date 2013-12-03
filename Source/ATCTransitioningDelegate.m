@@ -12,7 +12,7 @@
 #import "ATCAnimatedTransitioningSquish.h"
 
 // Use this switch to enable debugging
-#define debugLog 0
+#define ATCTransitioningDelegateDebugLog 0
 
 @interface ATCTransitioningDelegate ()
 
@@ -168,7 +168,7 @@
 
 -(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
     
-#if debugLog
+#if ATCTransitioningDelegateDebugLog
     NSLog(@"Presentation transition interactive state: %i", self.presentationTransition.isInteracting);
     NSLog(@"Dismissal transition interactive state: %i", self.dismissalTransition.isInteracting);
 #endif

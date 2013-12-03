@@ -8,7 +8,7 @@
 
 #import "ATCAnimatedTransitioningBounce.h"
 
-#define debugLog 0
+#define ATCAnimatedTransitioningBounceDebugLog 0
 
 @interface ATCAnimatedTransitioningBounce ()
 
@@ -120,7 +120,8 @@
 
 
 -(void)handlePanGesture:(UIPanGestureRecognizer *)recognizer inViewController:(UIViewController *)controller {
-#if debugLog
+
+#if ATCAnimatedTransitioningBounceDebugLog
     NSLog(@"%@", self.destinationViewController);
 #endif
     
