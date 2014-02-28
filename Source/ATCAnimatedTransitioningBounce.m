@@ -121,8 +121,10 @@
 
 -(void)handlePanGesture:(UIPanGestureRecognizer *)recognizer inViewController:(UIViewController *)controller {
 
+#ifdef DEBUG
 #if ATCAnimatedTransitioningBounceDebugLog
     NSLog(@"%@", self.destinationViewController);
+#endif
 #endif
     
     switch (recognizer.state) {

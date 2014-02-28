@@ -168,9 +168,11 @@
 
 -(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
     
+#ifdef DEBUG
 #if ATCTransitioningDelegateDebugLog
     NSLog(@"Presentation transition interactive state: %i", self.presentationTransition.isInteracting);
     NSLog(@"Dismissal transition interactive state: %i", self.dismissalTransition.isInteracting);
+#endif
 #endif
     
     if ( self.presentationTransition.isInteracting ) {
