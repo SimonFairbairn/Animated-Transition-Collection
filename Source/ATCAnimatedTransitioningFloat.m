@@ -20,14 +20,11 @@
         [[transitionContext containerView] sendSubviewToBack:toVC.view];
     }
     
-    
+    toVC.view.alpha = 0.0f;
     if ( !self.isDismissal ) {
-        toVC.view.alpha = 0.0f;
         toVC.view.transform = CGAffineTransformMakeScale(0.8, 0.8);
     } else {
         toVC.view.transform = CGAffineTransformMakeScale(1.2, 1.2);
-        toVC.view.alpha = 0.0f;
-        
     }
     
     
@@ -36,18 +33,15 @@
                         options:0
                      animations:^{
                          
+                         toVC.view.alpha = 1.0f;
+                         toVC.view.transform = CGAffineTransformIdentity;
                          
                          if ( !self.isDismissal ) {
-                             toVC.view.alpha = 1.f;
-                             toVC.view.transform = CGAffineTransformIdentity;
                              fromVC.view.transform = CGAffineTransformMakeScale(1.2, 1.2);
                          } else {
                              fromVC.view.alpha = 0.0f;
                              fromVC.view.transform = CGAffineTransformMakeScale(0.6, 0.6);
-                             toVC.view.alpha = 1.0f;
-                             toVC.view.transform = CGAffineTransformIdentity;
                          }
-                         
                      }
                      completion:^(BOOL finished) {
                          self.interacting = NO;
