@@ -17,7 +17,8 @@
 typedef NS_ENUM(NSInteger, ATCTransitionAnimationType) {
     ATCTransitionAnimationTypeFade,
     ATCTransitionAnimationTypeBounce,
-    ATCTransitionAnimationTypeSquish
+    ATCTransitionAnimationTypeSquish,
+    ATCTransitionAnimationTypeFloat
 };
 
 @interface ATCTransitioningDelegate : NSObject <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>

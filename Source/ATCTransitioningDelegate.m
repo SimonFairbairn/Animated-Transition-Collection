@@ -10,6 +10,7 @@
 #import "ATCAnimatedTransitioningFade.h"
 #import "ATCAnimatedTransitioningBounce.h"
 #import "ATCAnimatedTransitioningSquish.h"
+#import "ATCAnimatedTransitioningFloat.h"
 
 // Use this switch to enable debugging
 #define ATCTransitioningDelegateDebugLog 0
@@ -73,6 +74,10 @@
         }
         case ATCTransitionAnimationTypeSquish: {
             return [ATCAnimatedTransitioningSquish new];
+            break;
+        }
+        case ATCTransitionAnimationTypeFloat: {
+            return [ATCAnimatedTransitioningFloat new];
             break;
         }
         default: {
