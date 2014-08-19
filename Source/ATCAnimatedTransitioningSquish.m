@@ -43,7 +43,7 @@
     CGRect originalFromViewFrame = fromView.frame;
     BOOL isSideways = NO;
     if ( !self.isPush ) {
-        if ( fromViewController.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || fromViewController.interfaceOrientation == UIInterfaceOrientationLandscapeRight ) {
+        if ( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeRight ) {
             fromView.transform = CGAffineTransformIdentity;
             fromView.frame = CGRectMake(0, 0, originalFromViewFrame.size.height, originalFromViewFrame.size.width);
             

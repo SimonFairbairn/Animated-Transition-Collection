@@ -30,7 +30,7 @@
     CGFloat padding = 20.0f;
     
     
-    ATCTransitionAnimationDirection direction = [self adjustDirectionForOrientation:toViewController.interfaceOrientation];
+    ATCTransitionAnimationDirection direction = [self adjustDirectionForOrientation:[UIApplication sharedApplication].statusBarOrientation];
     
     if (self.isDismissal) {
         [container insertSubview:toViewController.view belowSubview:fromViewController.view];
