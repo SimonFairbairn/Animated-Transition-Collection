@@ -27,6 +27,7 @@
 		F44E7DD718085603007C476E /* ATCAnimatedTransitioningFade.m in Sources */ = {isa = PBXBuildFile; fileRef = F44E7DD618085603007C476E /* ATCAnimatedTransitioningFade.m */; };
 		F44E7DDA180859EA007C476E /* ATCAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = F44E7DD9180859EA007C476E /* ATCAnimatedTransitioning.m */; };
 		F44E7DDD1808621F007C476E /* ATCAnimatedTransitioningBounce.m in Sources */ = {isa = PBXBuildFile; fileRef = F44E7DDC1808621F007C476E /* ATCAnimatedTransitioningBounce.m */; };
+		F4C85A8318CA069D0058AE94 /* ATCAnimatedTransitioningFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C85A8218CA069D0058AE94 /* ATCAnimatedTransitioningFloat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		F44E7DD9180859EA007C476E /* ATCAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ATCAnimatedTransitioning.m; path = Source/ATCAnimatedTransitioning.m; sourceTree = SOURCE_ROOT; };
 		F44E7DDB1808621F007C476E /* ATCAnimatedTransitioningBounce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATCAnimatedTransitioningBounce.h; path = Source/ATCAnimatedTransitioningBounce.h; sourceTree = SOURCE_ROOT; };
 		F44E7DDC1808621F007C476E /* ATCAnimatedTransitioningBounce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ATCAnimatedTransitioningBounce.m; path = Source/ATCAnimatedTransitioningBounce.m; sourceTree = SOURCE_ROOT; };
+		F4C85A8118CA069D0058AE94 /* ATCAnimatedTransitioningFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATCAnimatedTransitioningFloat.h; path = Source/ATCAnimatedTransitioningFloat.h; sourceTree = SOURCE_ROOT; };
+		F4C85A8218CA069D0058AE94 /* ATCAnimatedTransitioningFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ATCAnimatedTransitioningFloat.m; path = Source/ATCAnimatedTransitioningFloat.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +205,8 @@
 				F44E7DDC1808621F007C476E /* ATCAnimatedTransitioningBounce.m */,
 				F407CE4D180FAE7600399A8C /* ATCAnimatedTransitioningSquish.h */,
 				F407CE4E180FAE7600399A8C /* ATCAnimatedTransitioningSquish.m */,
+				F4C85A8118CA069D0058AE94 /* ATCAnimatedTransitioningFloat.h */,
+				F4C85A8218CA069D0058AE94 /* ATCAnimatedTransitioningFloat.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				F44E7DD3180854EB007C476E /* ATCTransitioningDelegate.m in Sources */,
 				F407CE4F180FAE7600399A8C /* ATCAnimatedTransitioningSquish.m in Sources */,
 				F44E7D9E18085285007C476E /* main.m in Sources */,
+				F4C85A8318CA069D0058AE94 /* ATCAnimatedTransitioningFloat.m in Sources */,
 				F44E7DCD1808531C007C476E /* ATCTableViewController.m in Sources */,
 				F44E7DDD1808621F007C476E /* ATCAnimatedTransitioningBounce.m in Sources */,
 				F44E7DA218085285007C476E /* ATCAppDelegate.m in Sources */,

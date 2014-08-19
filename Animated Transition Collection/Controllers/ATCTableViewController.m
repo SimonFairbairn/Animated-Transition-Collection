@@ -31,7 +31,7 @@
 
 -(NSArray *)transitionList {
     if ( !_transitionList ) {
-        _transitionList = @[@[@"Simple Fade", @"Bounce", @"Squish"], @[@"Simple Fade", @"Bounce", @"Squish"],@[@"Same As Presentation", @"Simple Fade", @"Bounce", @"Squish"]];
+        _transitionList = @[@[@"Simple Fade", @"Bounce", @"Squish", @"Float"], @[@"Simple Fade", @"Bounce", @"Squish"],@[@"Same As Presentation", @"Simple Fade", @"Bounce", @"Squish"]];
     }
     return _transitionList;
 }
