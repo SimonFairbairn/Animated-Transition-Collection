@@ -19,11 +19,11 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     
-    [[transitionContext containerView] addSubview:toVC.view];
     if ( self.isDismissal ) {
         [[transitionContext containerView] sendSubviewToBack:toVC.view];
+    } else {
+        [[transitionContext containerView] addSubview:toVC.view];
     }
-
     
     if ( !self.isDismissal ) {
         toVC.view.alpha = 0.0f;
@@ -36,8 +36,6 @@
                           delay:0
                         options:0
                      animations:^{
-                         
-                         
                          if ( !self.isDismissal ) {
                              toVC.view.alpha = 1.f;
                          } else {
@@ -47,9 +45,6 @@
                      }
                      completion:^(BOOL finished) {
                          self.interacting = NO;
-                         if ( ![transitionContext transitionWasCancelled]) {
-                             [fromVC.view removeFromSuperview];
-                         }
                          [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
                      }];
     
