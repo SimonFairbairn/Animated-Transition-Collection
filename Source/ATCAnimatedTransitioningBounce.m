@@ -33,8 +33,7 @@
     ATCTransitionAnimationDirection direction = [self adjustDirectionForOrientation:[UIApplication sharedApplication].statusBarOrientation];
     
     if (self.isDismissal) {
-        [container insertSubview:toViewController.view belowSubview:fromViewController.view];
-        
+       
         switch (direction) {
             case ATCTransitionAnimationDirectionNone:
             case ATCTransitionAnimationDirectionLeft: {
