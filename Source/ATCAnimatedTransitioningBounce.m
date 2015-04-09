@@ -144,14 +144,14 @@
             if ( self.direction == ATCTransitionAnimationDirectionLeft ) {
                 percentTransitioned = (translation.x / CGRectGetWidth(view.frame));
             } else if ( self.direction == ATCTransitionAnimationDirectionRight ) {
-                percentTransitioned = fabsf(translation.x / CGRectGetWidth(view.frame));
+                percentTransitioned = fabs(translation.x / CGRectGetWidth(view.frame));
             } else if ( self.direction == ATCTransitionAnimationDirectionTop ) {
-                percentTransitioned = fabsf(translation.y / CGRectGetHeight(view.frame));
+                percentTransitioned = fabs(translation.y / CGRectGetHeight(view.frame));
             } else if ( self.direction == ATCTransitionAnimationDirectionBottom ) {
                 percentTransitioned = translation.y / CGRectGetHeight(view.frame);
             } else {
-                percentTransitioned = fabsf(translation.y / CGRectGetHeight(view.frame));
-                CGFloat percentTransitionedX = fabsf(translation.x / CGRectGetWidth(view.frame));
+                percentTransitioned = fabs(translation.y / CGRectGetHeight(view.frame));
+                CGFloat percentTransitionedX = fabs(translation.x / CGRectGetWidth(view.frame));
                 percentTransitioned = ( percentTransitionedX > percentTransitioned ) ? percentTransitionedX : percentTransitioned;
             }
             
@@ -168,9 +168,9 @@
             if ( self.direction == ATCTransitionAnimationDirectionLeft ) {
                 velocitySpeed = (velocity.x / recognizer.view.superview.frame.size.width);
             } else if ( self.direction == ATCTransitionAnimationDirectionRight ) {
-                velocitySpeed = fabsf((velocity.x / recognizer.view.superview.frame.size.width));
+                velocitySpeed = fabs((velocity.x / recognizer.view.superview.frame.size.width));
             } else if ( self.direction == ATCTransitionAnimationDirectionTop ) {
-                velocitySpeed = fabsf((velocity.y / recognizer.view.superview.frame.size.height));
+                velocitySpeed = fabs((velocity.y / recognizer.view.superview.frame.size.height));
             } else if ( self.direction == ATCTransitionAnimationDirectionBottom ) {
                 velocitySpeed = (velocity.y / recognizer.view.superview.frame.size.height);
             }

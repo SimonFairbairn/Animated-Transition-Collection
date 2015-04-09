@@ -72,8 +72,8 @@
             if ( self.isPush ) {
                 percentTransitioned =  translation.x / CGRectGetWidth(view.frame);
             } else {
-                percentTransitioned = fabsf(translation.y / CGRectGetHeight(view.frame));
-                percentTransitionedX = fabsf(translation.x / CGRectGetWidth(view.frame));
+                percentTransitioned = fabs(translation.y / CGRectGetHeight(view.frame));
+                percentTransitionedX = fabs(translation.x / CGRectGetWidth(view.frame));
                 percentTransitioned = ( percentTransitionedX > percentTransitioned ) ? percentTransitionedX : percentTransitioned;
             }
             
